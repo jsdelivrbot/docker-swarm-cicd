@@ -1,0 +1,11 @@
+version: '3.1'
+ 
+services:
+ 
+  nodejs-appl:
+    image: pavanraj29/nodejs-appl
+    replicas: 3
+    update-delay: 10s
+    ports:
+      - 5000:5000
+    restart: always
