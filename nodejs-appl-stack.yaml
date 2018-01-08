@@ -1,13 +1,14 @@
 version: '3.1'
- 
+
 services:
- 
+
   nodejs-appl:
-    image: pavanraj29/nodejs-appl
+    image: pavanraj29/nodejs-app:72
     deploy:
       replicas: 3
-      update-delay: 10s
-      restart: always
+      update_config:
+        parallelism: 1
+        delay: 10s
     ports:
       - 5000:5000
     
