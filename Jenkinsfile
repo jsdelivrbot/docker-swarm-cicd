@@ -53,7 +53,7 @@ pipeline {
                 expression { params.REQUESTED_ACTION == 'Rollingupdate' }
             }
             steps {
-                sh 'docker service update --image ${image}:${VERSION} ${stack}_nodejs-appl'
+                sh 'sudo docker service update --image ${image}:${VERSION} ${stack}_nodejs-appl'
             }
         }
      }  
