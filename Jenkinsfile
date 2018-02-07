@@ -4,7 +4,7 @@ pipeline {
     parameters {
        // string(defaultValue: 'v2', description: '', name: 'buildVersion')
         choice(
-            choices: 'Rollingupdate\nBlue-Green\nCanary',
+            choices: 'Rollingupdate\nBlue-Green',
             description: 'Deployment Type',
             name: 'REQUESTED_ACTION')
     }
@@ -18,6 +18,7 @@ pipeline {
     // released.
         VERSION= "${BUILD_ID}"
         image= "pavanraj29/nodejs-appl"
+        stack= "nodeapp"
      }
     
     stages {
@@ -52,8 +53,7 @@ pipeline {
                 expression { params.REQUESTED_ACTION == 'Rollingupdate' }
             }
             steps {
-                sh 'echo Hello'
-                sh 'kubectl patch deployment ${deployment} -p $"spec:\n   containers:\n   - name: front-end\n     image: ${image}"'
+                sh 'docker service update --image ${image}:${VERSION} ${stack}_nodejs-appl'
             }
         }
      }  
